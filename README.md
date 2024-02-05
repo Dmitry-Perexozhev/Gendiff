@@ -4,5 +4,7 @@
 ### Code Climate and test coverage status:
 [![Maintainability](https://api.codeclimate.com/v1/badges/2093802b1c775182c27b/maintainability)](https://codeclimate.com/github/Dmitry-Perexozhev/python-project-50/maintainability)
 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2093802b1c775182c27b/test_coverage)](https://codeclimate.com/github/Dmitry-Perexozhev/python-project-50/test_coverage)
+
 ### Flat json file comparison
 (https://asciinema.org/a/DhuDXtWSeVr3SdvTUgtov10n7)
