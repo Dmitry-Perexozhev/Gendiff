@@ -43,6 +43,7 @@ jobs:
           coverageCommand: make test-coverage
           debug: true
       - name: Run linter and pytest
-        run: make lint
-        run: make pytest
+        run: |
+          make lint
+          make pytest
   
