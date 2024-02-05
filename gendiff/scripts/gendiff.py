@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 import json
+import yaml
 import argparse
 
 
 def generate_diff(path_to_file1, path_to_file2):
     with open(path_to_file1) as file1, open(path_to_file2) as file2:
-        data1 = json.load(file1)
-        data2 = json.load(file2)
+        if path_to_file1.split('.')[1] == 'json':
+            data1 = json.load(file1)
+            data2 = json.load(file2)
+        elif path_to_file1.split('.')[1] == 'yaml':
+            data1 = yaml.load(file1, Loader=yaml.FullLoader)
+            data2 = yaml.load(file2, Loader=yaml.FullLoader)
         keys = sorted(set(data1.keys()) | set(data2.keys()))
         dif_stroke = ''
         for key in keys:
