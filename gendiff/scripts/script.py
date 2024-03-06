@@ -10,7 +10,10 @@ def init_argparse():
     parser.add_argument('second_file', type=str)
     parser.add_argument('-f', '--format', type=str, help='set format of output')
     args = parser.parse_args()
-    print(gen_stylish_format(args.first_file, args.second_file))
+    if args.format == 'plain':
+        pass
+    else:
+        print(gen_stylish_format(args.first_file, args.second_file))
 
 
 def main():
