@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from gendiff.formaters.stylish import gen_stylish_format
+from gendiff.formaters.plain import gen_plain_format
 import argparse
 
 
@@ -11,7 +12,7 @@ def init_argparse():
     parser.add_argument('-f', '--format', type=str, help='set format of output')
     args = parser.parse_args()
     if args.format == 'plain':
-        pass
+        print(gen_plain_format(args.first_file, args.second_file))
     else:
         print(gen_stylish_format(args.first_file, args.second_file))
 

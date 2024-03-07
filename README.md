@@ -7,4 +7,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2093802b1c775182c27b/test_coverage)](https://codeclimate.com/github/Dmitry-Perexozhev/python-project-50/test_coverage)
 
 ### Flat json file comparison
-(https://asciinema.org/a/DhuDXtWSeVr3SdvTUgtov10n7)
+https://asciinema.org/a/DhuDXtWSeVr3SdvTUgtov10n7
+
+### Stylish json file comparison
+https://asciinema.org/a/GIKyr6CpxiGguQIxkZu0aDnQX
