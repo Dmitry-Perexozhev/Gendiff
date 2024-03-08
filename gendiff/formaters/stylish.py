@@ -1,4 +1,3 @@
-
 NUMBER_OF_INDENTS = 4
 REPLACER = ' '
 
@@ -53,5 +52,3 @@ def gen_stylish_format(dict_diffs, depth):
                 result.append(f'{indent}  {dif}: {is_correct_output(dict_diffs[dif])}')
     result.append(f'{indent[:-2]}}}')
     return result
-
-

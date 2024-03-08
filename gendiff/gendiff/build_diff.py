@@ -1,4 +1,3 @@
-
 def build_diff(dict1, dict2):
     keys = sorted(set(dict1.keys()) | set(dict2.keys()))
     diffs = []
