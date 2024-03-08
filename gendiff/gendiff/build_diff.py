@@ -1,5 +1,5 @@
 
-def generate_diff(dict1, dict2):
+def build_diff(dict1, dict2):
     keys = sorted(set(dict1.keys()) | set(dict2.keys()))
     diffs = []
     for key in keys:
@@ -27,7 +27,7 @@ def generate_diff(dict1, dict2):
             diffs.append({
                 'key': key,
                 'status': 'has_children',
-                'value': generate_diff(value1, value2)
+                'value': build_diff(value1, value2)
             })
         else:
             diffs.append({
