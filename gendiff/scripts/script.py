@@ -10,12 +10,12 @@ def init_argparse():
     parser.add_argument('second_file', type=str)
     parser.add_argument('-f', '--format', type=str, help='set format of output')
     args = parser.parse_args()
-    result = generate_diff(args.first_file, args.second_file, args.format)
-    return result
+    return [args.first_file, args.second_file, args.format]
 
 
 def main():
-    print(init_argparse())
+    file_path1, file_path2, format_name = init_argparse()
+    print(generate_diff(file_path1, file_path2, format_name))
 
 
 if __name__ == '__main__':
