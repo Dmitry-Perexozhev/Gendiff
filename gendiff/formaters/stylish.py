@@ -31,31 +31,30 @@ def gen_stylish_format(dict_diffs, depth):
         result.append('{')
     indent = REPLACER * (NUMBER_OF_INDENTS * depth - 2)
     for dif in dict_diffs:
-        if 'status' in dif:
-            value = is_correct_output(dif.get("value"))
-            new_value = is_correct_output(dif.get("new_value"))
-            old_value = is_correct_output(dif.get("old_value"))
-            unchanged_str = f'{indent}  {dif["key"]}: {value}'
-            added_str = f'{indent}+ {dif["key"]}: {value}'
-            removed_str = f'{indent}- {dif["key"]}: {value}'
-            has_children_str = f'{indent}  {dif["key"]}: {{'
-            updated_old_str = f'{indent}- {dif["key"]}: {old_value}'
-            updated_new_str = f'{indent}+ {dif["key"]}: {new_value}'
-            if dif['status'] == 'unchanged':
-                result.append(unchanged_str)
-            elif dif['status'] == 'added':
-                result.append(added_str)
-                result += (open_dict(dif['value'], depth + 1))
-            elif dif['status'] == 'removed':
-                result.append(removed_str)
-                result += (open_dict(dif['value'], depth + 1))
-            elif dif['status'] == 'has_children':
-                result.append(has_children_str)
-                result += gen_stylish_format(dif["value"], depth + 1)
-            elif dif['status'] == 'updated':
-                result.append(updated_old_str)
-                result += (open_dict(dif['old_value'], depth + 1))
-                result.append(updated_new_str)
-                result += (open_dict(dif['new_value'], depth + 1))
+        value = is_correct_output(dif.get("value"))
+        new_value = is_correct_output(dif.get("new_value"))
+        old_value = is_correct_output(dif.get("old_value"))
+        unchanged_str = f'{indent}  {dif["key"]}: {value}'
+        added_str = f'{indent}+ {dif["key"]}: {value}'
+        removed_str = f'{indent}- {dif["key"]}: {value}'
+        has_children_str = f'{indent}  {dif["key"]}: {{'
+        updated_old_str = f'{indent}- {dif["key"]}: {old_value}'
+        updated_new_str = f'{indent}+ {dif["key"]}: {new_value}'
+        if dif['status'] == 'unchanged':
+            result.append(unchanged_str)
+        elif dif['status'] == 'added':
+            result.append(added_str)
+            result += (open_dict(dif['value'], depth + 1))
+        elif dif['status'] == 'removed':
+            result.append(removed_str)
+            result += (open_dict(dif['value'], depth + 1))
+        elif dif['status'] == 'has_children':
+            result.append(has_children_str)
+            result += gen_stylish_format(dif["value"], depth + 1)
+        elif dif['status'] == 'updated':
+            result.append(updated_old_str)
+            result += (open_dict(dif['old_value'], depth + 1))
+            result.append(updated_new_str)
+            result += (open_dict(dif['new_value'], depth + 1))
     result.append(f'{indent[:-2]}}}')
     return result
