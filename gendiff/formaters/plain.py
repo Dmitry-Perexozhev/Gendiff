@@ -22,6 +22,6 @@ def gen_plain_format(dict_diffs, path):
         elif dif['status'] == 'removed':
             result.append(f'Property \'{dict_path}\' was removed')
         elif dif['status'] == 'updated':
-            result.append(f'Property \'{dict_path}\' was updated.'
+            result.append(f'Property \'{dict_path}\' was updated. '
                           f'From {old_value} to {new_value}')
     return result

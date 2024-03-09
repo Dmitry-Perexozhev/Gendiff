@@ -14,3 +14,6 @@ https://asciinema.org/a/GIKyr6CpxiGguQIxkZu0aDnQX
 
 ### Plain json file comparison
 https://asciinema.org/a/MMz4URk2NTKREGt9Bsrnx9ak6
+
+### To json file comparison
+https://asciinema.org/a/WFV1geMjICX1xP1FUNTTiRNdc

@@ -6,7 +6,23 @@ def is_correct_output(obj):
     correct_output = {False: 'false', True: 'true', None: 'null'}
     if obj is None or isinstance(obj, bool):
         return correct_output.get(obj)
+    elif isinstance(obj, dict):
+        return '{'
     return obj
+
+
+def open_dict(obj, depth):
+    result_open = []
+    indent = REPLACER * (NUMBER_OF_INDENTS * depth - 2)
+    if isinstance(obj, dict):
+        for key in obj:
+            if isinstance(obj[key], dict):
+                result_open.append(f'{indent}  {key}: {{')
+                result_open += open_dict(obj[key], depth + 1)
+            else:
+                result_open.append(f'{indent}  {key}: {obj[key]}')
+        result_open.append(f'{indent[:-2]}}}')
+    return result_open
 
 
 def gen_stylish_format(dict_diffs, depth):
@@ -16,39 +32,30 @@ def gen_stylish_format(dict_diffs, depth):
     indent = REPLACER * (NUMBER_OF_INDENTS * depth - 2)
     for dif in dict_diffs:
         if 'status' in dif:
+            value = is_correct_output(dif.get("value"))
+            new_value = is_correct_output(dif.get("new_value"))
+            old_value = is_correct_output(dif.get("old_value"))
+            unchanged_str = f'{indent}  {dif["key"]}: {value}'
+            added_str = f'{indent}+ {dif["key"]}: {value}'
+            removed_str = f'{indent}- {dif["key"]}: {value}'
+            has_children_str = f'{indent}  {dif["key"]}: {{'
+            updated_old_str = f'{indent}- {dif["key"]}: {old_value}'
+            updated_new_str = f'{indent}+ {dif["key"]}: {new_value}'
             if dif['status'] == 'unchanged':
-                result.append(f'{indent}  {dif["key"]}: {is_correct_output(dif["value"])}')
+                result.append(unchanged_str)
             elif dif['status'] == 'added':
-                if isinstance(dif['value'], dict):
-                    result.append(f'{indent}+ {dif["key"]}: {{')
-                    result += gen_stylish_format(dif['value'], depth + 1)
-                else:
-                    result.append(f'{indent}+ {dif["key"]}: {is_correct_output(dif["value"])}')
+                result.append(added_str)
+                result += (open_dict(dif['value'], depth + 1))
             elif dif['status'] == 'removed':
-                if isinstance(dif['value'], dict):
-                    result.append(f'{indent}- {dif["key"]}: {{')
-                    result += gen_stylish_format(dif['value'], depth + 1)
-                else:
-                    result.append(f'{indent}- {dif["key"]}: {is_correct_output(dif["value"])}')
+                result.append(removed_str)
+                result += (open_dict(dif['value'], depth + 1))
             elif dif['status'] == 'has_children':
-                result.append(f'{indent}  {dif["key"]}: {{')
+                result.append(has_children_str)
                 result += gen_stylish_format(dif["value"], depth + 1)
             elif dif['status'] == 'updated':
-                if isinstance(dif['old_value'], dict):
-                    result.append(f'{indent}- {dif["key"]}: {{')
-                    result += gen_stylish_format(dif['old_value'], depth + 1)
-                else:
-                    result.append(f'{indent}- {dif["key"]}: {is_correct_output(dif["old_value"])}')
-                if isinstance(dif['new_value'], dict):
-                    result.append(f'{indent}+ {dif["key"]}: {{')
-                    result += gen_stylish_format(dif['new_value'], depth + 1)
-                else:
-                    result.append(f'{indent}+ {dif["key"]}: {is_correct_output(dif["new_value"])}')
-        else:
-            if isinstance(dict_diffs[dif], dict):
-                result.append(f'{indent}  {dif}: {{')
-                result += gen_stylish_format(dict_diffs[dif], depth + 1)
-            else:
-                result.append(f'{indent}  {dif}: {is_correct_output(dict_diffs[dif])}')
+                result.append(updated_old_str)
+                result += (open_dict(dif['old_value'], depth + 1))
+                result.append(updated_new_str)
+                result += (open_dict(dif['new_value'], depth + 1))
     result.append(f'{indent[:-2]}}}')
     return result
