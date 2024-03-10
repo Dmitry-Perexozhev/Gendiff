@@ -4,6 +4,8 @@ def is_correct_output(obj):
         return correct_output.get(obj)
     elif isinstance(obj, dict):
         return '[complex value]'
+    elif isinstance(obj, int):
+        return obj
     return "\'" + str(obj) + "\'"
 
 
