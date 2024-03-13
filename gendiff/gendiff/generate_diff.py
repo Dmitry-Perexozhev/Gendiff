@@ -8,8 +8,10 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
     diffs = build_diff(data_of_file1, data_of_file2)
     if format_name == 'plain':
         result = plain.gen_plain_format(diffs, [])
+        result = '\n'.join(result)
     elif format_name == 'json':
         result = to_json.gen_json_format(diffs)
     else:
         result = stylish.gen_stylish_format(diffs, 1)
-    return result if format_name == 'json' else '\n'.join(result)
+        result = '\n'.join(result)
+    return result
