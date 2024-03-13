@@ -16,14 +16,14 @@ def gen_plain_format(dict_diffs, path):
         new_value = is_correct_output(dif.get("new_value"))
         old_value = is_correct_output(dif.get("old_value"))
         dict_path = ".".join(path + [dif["key"]])
-        if dif['status'] == 'has_children':
+        if dif['type'] == 'has_children':
             result += gen_plain_format(dif["value"], path + [dif["key"]])
-        elif dif['status'] == 'added':
+        elif dif['type'] == 'added':
             result.append(f'Property \'{dict_path}\' was added '
                           f'with value: {value}')
-        elif dif['status'] == 'removed':
+        elif dif['type'] == 'removed':
             result.append(f'Property \'{dict_path}\' was removed')
-        elif dif['status'] == 'updated':
+        elif dif['type'] == 'updated':
             result.append(f'Property \'{dict_path}\' was updated. '
                           f'From {old_value} to {new_value}')
     return result

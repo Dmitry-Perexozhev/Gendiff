@@ -7,31 +7,31 @@ def build_diff(dict1, dict2):
         if value1 == value2:
             diffs.append({
                 'key': key,
-                'status': 'unchanged',
+                'type': 'unchanged',
                 'value': value2
             })
         elif key not in dict1.keys():
             diffs.append({
                 'key': key,
-                'status': 'added',
+                'type': 'added',
                 'value': value2
             })
         elif key not in dict2.keys():
             diffs.append({
                 'key': key,
-                'status': 'removed',
+                'type': 'removed',
                 'value': value1
             })
         elif isinstance(value1, dict) and isinstance(value2, dict):
             diffs.append({
                 'key': key,
-                'status': 'has_children',
+                'type': 'has_children',
                 'value': build_diff(value1, value2)
             })
         else:
             diffs.append({
                 'key': key,
-                'status': 'updated',
+                'type': 'updated',
                 'old_value': dict1[key],
                 'new_value': dict2[key]
             })

@@ -40,18 +40,18 @@ def gen_stylish_format(dict_diffs, depth):
         has_children_str = f'{indent}  {dif["key"]}: {{'
         updated_old_str = f'{indent}- {dif["key"]}: {old_value}'
         updated_new_str = f'{indent}+ {dif["key"]}: {new_value}'
-        if dif['status'] == 'unchanged':
+        if dif['type'] == 'unchanged':
             result.append(unchanged_str)
-        elif dif['status'] == 'added':
+        elif dif['type'] == 'added':
             result.append(added_str)
             result += (open_dict(dif['value'], depth + 1))
-        elif dif['status'] == 'removed':
+        elif dif['type'] == 'removed':
             result.append(removed_str)
             result += (open_dict(dif['value'], depth + 1))
-        elif dif['status'] == 'has_children':
+        elif dif['type'] == 'has_children':
             result.append(has_children_str)
             result += gen_stylish_format(dif["value"], depth + 1)
-        elif dif['status'] == 'updated':
+        elif dif['type'] == 'updated':
             result.append(updated_old_str)
             result += (open_dict(dif['old_value'], depth + 1))
             result.append(updated_new_str)
