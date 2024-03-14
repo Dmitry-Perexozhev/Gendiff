@@ -1,4 +1,4 @@
-def is_correct_output(obj):
+def is_correct_output_plain(obj):
     correct_output = {False: 'false', True: 'true', None: 'null'}
     if obj is None or isinstance(obj, bool):
         return correct_output.get(obj)
@@ -12,9 +12,9 @@ def is_correct_output(obj):
 def gen_plain_format(dict_diffs, path):
     result = []
     for dif in dict_diffs:
-        value = is_correct_output(dif.get("value"))
-        new_value = is_correct_output(dif.get("new_value"))
-        old_value = is_correct_output(dif.get("old_value"))
+        value = is_correct_output_plain(dif.get("value"))
+        new_value = is_correct_output_plain(dif.get("new_value"))
+        old_value = is_correct_output_plain(dif.get("old_value"))
         dict_path = ".".join(path + [dif["key"]])
         if dif['type'] == 'has_children':
             result += gen_plain_format(dif["value"], path + [dif["key"]])

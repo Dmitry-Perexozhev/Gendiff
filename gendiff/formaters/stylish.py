@@ -2,7 +2,7 @@ NUMBER_OF_INDENTS = 4
 REPLACER = ' '
 
 
-def is_correct_output(obj):
+def is_correct_output_stylish(obj):
     correct_output = {False: 'false', True: 'true', None: 'null'}
     if obj is None or isinstance(obj, bool):
         return correct_output.get(obj)
@@ -31,9 +31,9 @@ def gen_stylish_format(dict_diffs, depth):
         result.append('{')
     indent = REPLACER * (NUMBER_OF_INDENTS * depth - 2)
     for dif in dict_diffs:
-        value = is_correct_output(dif.get("value"))
-        new_value = is_correct_output(dif.get("new_value"))
-        old_value = is_correct_output(dif.get("old_value"))
+        value = is_correct_output_stylish(dif.get("value"))
+        new_value = is_correct_output_stylish(dif.get("new_value"))
+        old_value = is_correct_output_stylish(dif.get("old_value"))
         unchanged_str = f'{indent}  {dif["key"]}: {value}'
         added_str = f'{indent}+ {dif["key"]}: {value}'
         removed_str = f'{indent}- {dif["key"]}: {value}'
