@@ -1,19 +1,50 @@
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/Dmitry-Perexozhev/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Dmitry-Perexozhev/python-project-50/actions)
-
-### Code Climate and test coverage status:
-[![Maintainability](https://api.codeclimate.com/v1/badges/2093802b1c775182c27b/maintainability)](https://codeclimate.com/github/Dmitry-Perexozhev/python-project-50/maintainability)
-
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2093802b1c775182c27b/test_coverage)](https://codeclimate.com/github/Dmitry-Perexozhev/python-project-50/test_coverage)
+### Gendiff
 
-### Flat json file comparison
-https://asciinema.org/a/DhuDXtWSeVr3SdvTUgtov10n7
+Gendiff is CLI utility for comparing configuration files in JSON and YAML formats.
 
-### Stylish json file comparison
-https://asciinema.org/a/GIKyr6CpxiGguQIxkZu0aDnQX
+### Key Features:
 
-### Plain json file comparison
-https://asciinema.org/a/MMz4URk2NTKREGt9Bsrnx9ak6
+- Find differences between files
+- Two comparison formats - flat and recursive (stylish)
 
-### To json file comparison
-https://asciinema.org/a/WFV1geMjICX1xP1FUNTTiRNdc
+### Installation requirements
+
+- Python 
+- Poetry
+
+1) Clone the project repository to your local device:
+```
+git clone git@github.com:Dmitry-Perexozhev/Gendiff.git
+```
+2) Go to the project directory:
+```
+cd Gendiff
+```
+3) Configure Poetry to create virtual environments in the .venv folder at the root of the project:
+```
+poetry config virtualenvs.in-project true
+```
+4) Installing dependencies:
+```
+poetry install
+```
+
+#### Usage
+
+- Comparison of two files in flat format 
+```
+gendiff -f plain path_to_file_1 path_to_file_2
+```
+- Comparison of two files in stylish format 
+```
+gendiff -f stylish path_to_file_1 path_to_file_2
+```
+or (stylish default)
+```
+gendiff path_to_file_1 path_to_file_2
+```
+- Help information
+```
+gendiff -h
+```
